@@ -1,0 +1,177 @@
+{% load static %}
+
+body{
+    font-family: Roboto, Helvetica;
+}
+
+h1, h2, h4, h5, h6{
+    color:#3C8C05;
+}
+
+.header{
+    background-color: #7359C6;
+    color: #E1FF00;
+}
+
+.icon-text{
+    color: #E1FF00;
+    text-decoration: none;
+}
+
+.icon-text:hover{
+    text-decoration: none;
+    color: #E1FF00;
+    cursor: pointer;
+}
+
+.header-button{
+    border: 1px solid #E1FF00;
+    border-radius: 3px;
+
+}
+.header-button:hover{
+    border: 1px solid orange;
+}
+
+.icon{
+    height:20px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+.category{
+    font-weight: bold;
+    color: #8D91FC;
+
+}
+.category:hover{
+   color: #506CD0;
+}
+
+
+.quantity{
+    color:#7359C6;
+    text-decoration: none;
+}
+
+.quantity-field{
+    outline:none;
+    text-decoration: none;
+    background-color:#7359C6;
+    border:none;
+     color:#E1FF00;=
+    border-radius:10px;
+
+}
+
+.quantity-field:active :focus :hover{
+    border: 2px solid #7359C6;
+}
+
+.btn-option{
+    outline: none;
+}
+
+.price-block{
+    position:absolute;
+    bottom:10px;
+    right:10px;
+}
+
+.price-f{
+    font-weight: bold;
+    font-size: 150%;
+
+
+}
+
+.to-cart{
+    background: #00823C;
+    border: none;
+    border-radius:16px;
+    color: #FFC832;
+    font-size: 120%;
+    line-height: 100%;
+}
+
+
+
+
+
+
+.acor-container .acor-body {
+    width:90%;
+    margin: 0 auto;
+    height: 0;
+    color: white;
+    box-sizing: border-box;
+    transition: color 1s, padding 1s;
+    overflow: hidden;
+
+}
+
+.acor-container label {
+    border-radius:7px;
+    cursor: pointer;
+    display: block;
+    padding: 5px 5px;
+    width: 100%;
+    color: #7359C6;
+    border: 2px solid orange;
+    font-size: 90%;
+    z-index: 100;
+    margin: 0 0 5px;
+    transition: background-color 1s;
+}
+.acor-container label:hover {
+    background-color:#f5ffa6;
+}
+.acor-container input{
+    display: none;
+}
+.acor-container label:before {
+    content: '\276F';
+    float: right;
+}
+.acor-container input:checked + label {
+    background-color: #7359C6;
+    color: #E1FF00;
+    border:none;
+
+}
+.acor-container input:checked + label:before {
+    transition: transform .35s;
+    transform: rotate(90deg);
+}
+.acor-container input:checked + label + .acor-body {
+    height: auto;
+    margin-top: -5px;
+    color: #000;
+}
+
+.acor-body div{
+    border-radius:7px;
+    transition: background-color 1s;
+    line-height: 80%;
+    background-color:#f5ffa6;
+
+}
+.acor-body div:hover{
+    background-color:orange;
+}
+
+.acor-body div a{
+    text-decoration: none;
+    color: #7359C6;
+    font-size: 80%;
+
+}
+
+.delete{
+
+    height: 20px;
+    width:20px;
+	color: rgba(50, 60, 140, 0);
+    border: none;
+}
+
+

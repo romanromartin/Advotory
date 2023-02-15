@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+  {% for cat in category  %}
+    <div class="col-3 my-2" >
+       <a href="{% url 'category' cat.id_category %}" style=""  >
+          <img class="w-100" src="{{cat.prw_category}} " alt="{{cat.category}}" style="border: 3px solid orange; border-radius:20px; box-shadow: 0 0 40px #7359C6 inset; ">
+          <div class="px-2 " style="position:absolute; bottom:10px; line-height: 90%; width:90%; ">
+              <span class="category" style="">
+                  {{cat.category}}
+              </span>
+          </div>
+       </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

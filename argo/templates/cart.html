@@ -1,0 +1,57 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+<div class="row" >
+
+
+
+    <div class="col-12 text-center" >
+        {% if total_price > 0 %}
+            <h2  >Товары в корзине</h2>
+        {% else %}
+            <h2  >У вас пока нет покупок</h2>
+        {% endif %}
+    </div>
+
+
+
+
+
+    {% for item in item_list %}
+        <div class="col-2">
+            <img class="w-100"  src="/{{item.1}} " alt="{{item.0}}"  style="border-radius:70px;">
+        </div>
+        <div class="col-8" >
+            <p class="m-0" style="color:#3C8C05;" >{{ item.2 }} </p>
+            <h5 class="m-0">{{ item.0 }}</h5>
+            <p class="m-0" style="color: #7359C6;" > {% if item.8 %} {{ item.8}} {% endif %}  {{ item.4 }} </p>
+            <p class="m-0" style="color: #7359C6;" >{{item.3}}   {{ item.5 }} </p>
+        </div>
+        <div class="col-2 item-price">
+            <form method="post" >
+                {% csrf_token %}
+                <input class="delete"  type="submit"
+                   style= "background-image: url({% static 'images/delete.svg' %});"
+                   name="delete" value="{{ item.7 }}" >
+            </form>
+            <a > {{ item.6 }}</a>
+        </div>
+
+
+    {%  endfor %}
+    {% if total_price > 0 %}
+    <div class="col-7" ></div>
+    <div class=" col-2 " >Итого</div>
+    <div class="col-3" > {{ total_price}} руб.</div>
+    {% endif %}
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+style="background-image: url('{% static '/images/bg_topper.png' %}');
+                                                          background-repeat: repeat-x;
+                                                           background-size: contain; "
+
+
+ <img class="w-100" src="{{cat.prw_category}}" alt="{{cat.category}}">
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
+
+
+   <select class="form-select w-100 " aria-label="" name="variation" style="font-size: 70%;">
+
+                            {% for var in all_var %}
+                                {% if var.prod == pro %}
+                                <option value="{{var.id}}" style="font-size: 120%;">Ширина: {{var.width}}  Цена {{var.price}} руб/мп</option>
+
+                                {% endif %}
+                            {% endfor %}
+  </select>
+
+<input label={{ size }}  type="radio" id="{{ size }}" name="size" value="{{ size }}"  style="margin-bottom:3px;">
+
+
+
+document.getElementById('checkbox_for_{{pro.id_product}}').querySelectorAll("input[type=radio]")
+
+
+
+var checkboxes = document.querySelectorAll("input[type=radio]");
+
+var enabledSettings = []
+
+checkboxes.forEach(function(checkbox) {
+  checkbox.addEventListener('change', function() {
+    enabledSettings =
+      Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+      .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+      .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+
+    console.log(enabledSettings)
+  })
+});
+
+11111111111111111111111111111
+
+
+
+var checkboxes = document.getElementById('checkbox_for_{{pro.id_product}}').querySelectorAll("input[type=radio]")
+                       checkboxes.forEach(function(checkbox) {
+
+                        checkbox.addEventListener('change', function(e) {
+                        if (e.target.checked) {
+                            console.log(e.target.id);
+                        }
+
+                        })
+                        });
+
+
+
+
+
+
+
+
+
+
+
+
+

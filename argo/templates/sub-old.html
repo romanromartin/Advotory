@@ -1,0 +1,108 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+
+<div  class="row">
+    <div class="col-2" style="background-color:orange;">
+        <a>Навигация</a>
+    </div>
+    <div class="col-10 row">
+        {% for pro in products %}
+            <div class="col-6 p-0 "  >
+                <div class="row " style="border: 3px solid orange; border-radius:20px; margin:1px; ">
+                    <div class="col-3 p-0">
+                        <a href=" "  >
+                            <img class="w-100"  src="/{{pro.prw_product}} " alt="{{pro.product}}"  style="border-radius:20px;">
+                        </a>
+                    </div>
+                    <div class="col-9 p-1 ">
+                        <h6 class="category " style=" color:#7359C6;"   > {{pro.product}} </h6>
+                        <form method="post" >
+                    {% csrf_token %}
+                            <div class="mb-1" id="checkbox_for_{{pro.id_product}}">
+                            {% for var in all_var %}
+                                {% if var.prod == pro %}
+                                        <label for="{{ var.id }}" style="display:inline;" class="p-1"  >
+                                        <input class="check-option "  {% if var.default%} checked {% endif %}
+                                               type="radio" id="{{ var.id }}" name="variation" value="{{ var.id }}"  style="display:block;">
+
+                                                Ширина: {{var.width}}  Цена {{var.price}} руб/мп
+                                        </label>
+
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                            <div>
+                                <a class="quantity" >Количество </a>
+                                 <input class="quantity-field text-center" type="number"  id="{{pro.id_product}}"  value="1" name="quantity" min=".1" max="50" step=".1" >
+                            </div>
+
+
+                            <input  type="submit" name="add" value="-" style="position:absolute; top:5px; right:5px; color:RGBA(0, 0, 0, 0);
+                            width:36px; height:36px; border-radius:18px; border:none; background-image:url( {% static 'css/cart.svg' %} ) "  >
+                            <a id="result_for_{{pro.id_product}}">1 </a>
+                            <script>
+                       document.getElementById('checkbox_for_{{pro.id_product}}').querySelectorAll("input[type=radio]").forEach(function(checkbox) {
+                            checkbox.addEventListener('change', function(e) {
+                                if (e.target.checked) {
+                                    console.log(e.target.parentNode.textContent);}
+                            })
+                              });
+
+
+
+
+
+
+
+
+                                document.getElementById('{{pro.id_product}}').addEventListener('change',(e) =>
+                                {
+                                document.getElementById('result_for_{{pro.id_product}}').textContent = e.target.value;});
+
+
+
+
+
+                            </script>
+
+
+
+
+
+                    </form>
+                    </div>
+
+                </div>
+            </div>
+
+        {% endfor %}
+        <input class="quantity-field text-center" type="number"  id="ww"  value="1" name="quantity" min=".1" max="50" step=".1" >
+        <input class="quantity-field text-center" type="number"  id="qq"  value="1" name="quantity" min=".1" max="50" step=".1" >
+        <a  id="res"></a>
+        <a  id="res2"></a>
+        <script>
+        document.getElementById('ww').addEventListener('change', (e) => {document.getElementById('res2').textContent = e.target.value;});
+
+        var elem = document.getElementById('qq');
+        var result = document.getElementById('res');
+        elem.addEventListener('change', (e) => {
+        result.textContent = e.target.value;
+        });
+        </script>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

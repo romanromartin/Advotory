@@ -1,0 +1,124 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+
+
+
+<div class="row">
+    <div class=" col-12 text-center" >
+        <h2>{{ sub_sel.sub }}</h2>
+    </div>
+
+        {% for pro in product_list %}
+            <div class="col-2 py-0 px-1 " id="{{pro.0 }}" onClick="reply_click(this.id)" style="cursor:pointer;"
+                 data-toggle="modal" data-target="#PriceModal"
+                 data-product="{{pro.1}}"
+                 data-prw="{{pro.2}}"
+                 data-unit="{{pro.3}}"
+                 data-float="{{pro.4}}"
+                 data-producer="{{pro.5}}"
+                 data-matt="{{pro.6}}"
+                 data-option="{{ pro.7 }}"
+            >
+
+
+                <img class="w-100"  src="/{{pro.2}} " alt="{{pro.1}}"  style="border-radius:70px;">
+                <a   > {{pro.1}} </a>
+
+                {% for op in pro.7 %}
+                <a style="display:none;" class="{{ pro.0 }}"
+                   data-id="{{ op.0 }}"
+                   data-width="{{ op.1 }}"
+                   data-sheet="{{ op.2 }}"
+                   data-thicknes="{{ op.3 }}"
+                   data-price="{{ op.4 }}"
+                   data-default="{{ op.5 }}"
+                   data-color="{{ op.6 }}"
+                ></a>
+                {%  endfor  %}
+
+            </div>
+        {% endfor %}
+
+</div>
+
+
+
+<!----------------------------------------------modal window-------------------->
+
+<div class="modal fade" id="PriceModal" tabindex="-1" aria-labelledby="PriceModalLabel"
+     aria-hidden="true"  >
+  <div class="modal-dialog" style="max-width:800px;" >
+    <div class="modal-content " style="background-color:#e4e7ec;">
+        <div class="row m-0">
+           <div class="col-11">
+               <h4 class="modal-title  " id="PriceModalLabel" ></h4>
+            </div>
+            <div class="col-1"  >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color:#fd4539; font-size:200%;  ">&times;</span>
+                </button>
+            </div>
+            <div class="col-6" >
+                <img class="w-100 prw-sel"   src="" alt=""  style="border-radius:200px;">
+            </div>
+            <div class="col-6">
+                <form method="post" >
+                    {% csrf_token %}
+                <div>
+                    <a class=" quantity"  > {{ sub_sel.sub }} </a>
+                </div>
+                <div class="producer-field">
+                    <a class="producer quantity" ></a>
+                </div>
+
+                <div class=" quant-field mb-2">
+                    <a class="quantity" >Количество </a>
+                </div>
+                <div class="option-field">
+
+                </div>
+                <div class="matt-field" >
+
+                </div>
+
+                <div style="height:50px;">
+
+                </div>
+
+
+                <div class="price-block">
+                    <a class="price-f quantity" style="text-decoration: none;" >Цена <span class="total-price"  > -- </span> руб. </a>
+
+
+                        <button class="to-cart py-2 mb-1" name="tocart" value="post">В корзину</button>
+                </div>
+<!--                <button type="button" class=" py-2 mb-3 " data-dismiss="modal"-->
+<!--                style="background: #00823C; border: none; font-family: FuturaRegular;-->
+<!--                border-radius:16px; color: #FFC832; font-size: 150%; line-height: 100%;">Закрыть</button>-->
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

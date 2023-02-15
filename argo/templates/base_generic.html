@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+  <title>Argo outdoor</title>
+{% endblock %}
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="{% static 'images/fav.ico' %}" />
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/jquery-3.6.3.min.js'%}" >    </script>
+    <script src="{% static 'js/my-script.js'%}" >    </script>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+
+
+</head>
+<body>
+<div class="header" >
+  <div class="container">
+    <div class="row py-1 ">
+
+      <div class="col-4  " >
+        <a  href="{% url 'index' %}" >
+          <img class="mt-2" src="{% static 'images/logo.png' %}" alt="Logo" >
+        </a>
+      </div>
+      <div class="col-8 " >
+
+          <a  class="ml-3 float-right header-button " href="{% url 'cart' %}" style="">
+            <img class="icon m-1   " src="{% static 'images/cart.svg' %}" alt="Phone">
+        </a>
+        <a  class=" ml-2  float-right icon-text">
+          <img class="icon " src="{% static 'images/mail.svg' %}" alt="E-mail">
+          print-argo.msk@mail.ru
+        </a>
+        <a class="float-right icon-text"><img class="icon  " src="{% static 'images/phone.svg' %}" alt="Phone">
+          +7-916-321-09-09
+        </a>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-3 acor-container" >
+        <br>
+        <br>
+                {% for cat in category %}
+                    <input type="radio" name="acor" id="{{ cat.id_category }}"
+                    {% if  sub_sel.cat == cat %} checked="checked"  {% endif %}>
+                    <label for="{{ cat.id_category }}">{{ cat.category }}</label>
+
+                    <div class="acor-body mt-1 " >
+                        {% for s in subcategory %}
+
+                            {% if s.cat == cat %}
+                                <div class="mb-1 text-center" >
+                                     <a href=" {% url 'sub' s.cat.id_category s.id_sub %}  " >{{ s.sub }}</a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+    </div>
+    <div class="col-9">
+      {% block content %}  {% endblock %}
+    </div>
+
+
+
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
