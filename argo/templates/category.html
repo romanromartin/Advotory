@@ -13,7 +13,7 @@
                     <a href="{% url 'sub' cat_sel.id_category s.id_sub %} " style=""  >
                         <img class="w-100" src="/{{s.prw_sub}} " alt="{{s.sub}}"
                              style="border: 3px solid orange; border-radius:20px; box-shadow: 0 0 40px #7359C6 inset; ">
-                        <div class="px-2 " style="position:absolute; bottom:10px; line-height: 90%; width:90%; ">
+                        <div class="px-2 " style="position:absolute; bottom:10px; line-height: 90%; width:90%; font-size:90%; ">
                             <span class="category" style="">
                                 {{s.sub}}
                             </span>
@@ -23,7 +23,7 @@
             {% endfor %}
 
             {% for pro in product_list %}
-                <div class="col-2 py-0 px-1 " id="{{pro.0 }}" onClick="reply_click(this.id)" style="cursor:pointer;"
+                <div class="col-2 py-1 px-1 " id="{{pro.0 }}" onClick="reply_click(this.id)" style="cursor:pointer;"
                  data-toggle="modal" data-target="#PriceModal"
                  data-product="{{pro.1}}"
                  data-prw="{{pro.2}}"
@@ -33,8 +33,16 @@
                  data-matt="{{pro.6}}"
                  data-option="{{ pro.7 }}"
             >
-                <img class="w-100"  src="/{{pro.2}} " alt="{{pro.1}}"  style="border-radius:70px;">
-                <a   > {{pro.1}} </a>
+                <div style="cursor:pointer; line-height: 80%; color:#7359C6; font-weight:bold; font-size:80%; background-color:#f2faf2;
+                 border-radius:16px; height:180px; ">
+                    <img class="w-100 mb-1"  src="/{{pro.2}} " alt="{{pro.1}}"  style="border-radius:70px;">
+                    <div class="px-1 text-center">
+                        <a  style="" > {{pro.1}} </a>
+                    </div>
+
+                 </div>
+
+
 
                 {% for op in pro.7 %}
                 <a style="display:none;" class="{{ pro.0 }}"
@@ -45,6 +53,7 @@
                    data-price="{{ op.4 }}"
                    data-default="{{ op.5 }}"
                    data-color="{{ op.6 }}"
+                   data-power="{{ op.7 }}"
                 ></a>
                 {%  endfor  %}
 

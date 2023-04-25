@@ -18,13 +18,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
+<!--    <script src="{% static 'js/popper.min.js'%}" >    </script>-->
+
     <script src="{% static 'js/jquery-3.6.3.min.js'%}" >    </script>
+    <script src="{% static 'js/bootstrap.min.js'%}" >    </script>
     <script src="{% static 'js/my-script.js'%}" >    </script>
 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
 
@@ -37,13 +39,14 @@
 
       <div class="col-4  " >
         <a  href="{% url 'index' %}" >
-          <img class="mt-2" src="{% static 'images/logo.png' %}" alt="Logo" >
+          <img class="mt-2 ml-3" src="{% static 'images/logo.svg' %}" alt="Logo" style="height:25px;" >
         </a>
       </div>
       <div class="col-8 " >
 
+
           <a  class="ml-3 float-right header-button " href="{% url 'cart' %}" style="">
-            <img class="icon m-1   " src="{% static 'images/cart.svg' %}" alt="Phone">
+            <img class="icon m-1   " src="{% static 'images/cart.svg' %}" alt="Phone" style="">
         </a>
         <a  class=" ml-2  float-right icon-text">
           <img class="icon " src="{% static 'images/mail.svg' %}" alt="E-mail">
@@ -51,6 +54,9 @@
         </a>
         <a class="float-right icon-text"><img class="icon  " src="{% static 'images/phone.svg' %}" alt="Phone">
           +7-916-321-09-09
+        </a>
+        <a  class="mr-3 float-right header-button " href="{% url 'handler' %}" style="">
+            <img class="icon m-1   " src="{% static 'images/account.svg' %}" alt="Phone" style="">
         </a>
 
 
@@ -64,27 +70,98 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-3 acor-container" >
-        <br>
-        <br>
-                {% for cat in category %}
-                    <input type="radio" name="acor" id="{{ cat.id_category }}"
-                    {% if  sub_sel.cat == cat %} checked="checked"  {% endif %}>
-                    <label for="{{ cat.id_category }}">{{ cat.category }}</label>
+    <div class="col-3 nav-side-bar pt-2" >
+<!-- --------------------       Navigation bar---------------------------------------->
+        <script>
+            var obj_json = $.parseJSON( "{{ catjson|escapejs }}" );
+            $.each(obj_json, function(index, val){
+                let cat = $('<a> </a>');
+                $(cat).text(val.fields.category);
+                $(cat).attr('href', '/' + val.pk );
+                $(cat).attr('id', val.pk + 'nav' )
+                $(cat).css({'border-radius':'7px',
+                            'cursor': 'pointer',
+                            'display': 'block',
+                            'width': '100%',
+                            'color': '#7359C6',
+                            'border': '2px solid orange',
+                            'padding': '5px 5px',
+                            'margin': '0 0 5px',
+                            'font-size': '90%',
+                            'transition': 'background-color 1s',
+                            'line-height': '90%',
+                            'text-decoration': 'none'
+                            });
 
-                    <div class="acor-body mt-1 " >
-                        {% for s in subcategory %}
+                $(cat).hover(function(){
+                    $(this).css({ 'background-color':'#f5ffa6' });},
+                    function(){
+                    $(this).css({ 'background-color':'#fff' });});
 
-                            {% if s.cat == cat %}
-                                <div class="mb-1 text-center" >
-                                     <a href=" {% url 'sub' s.cat.id_category s.id_sub %}  " >{{ s.sub }}</a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                {% endfor %}
+                $('.nav-side-bar').append(cat)
+
+                if ('{{cat_sel.id_category |escapejs }}' === val.pk){
+                    var sub_json = $.parseJSON( "{{ subjson|escapejs }}" )
+                    $.each(sub_json, function(index, value  ) {
+                        if(value.fields.cat === '{{cat_sel.id_category |escapejs}}' ){
+                            let sub = $('<a> </a>');
+                            $(sub).text(value.fields.sub);
+                            $(sub).attr('href', '/' + value.fields.cat + '/' + value.pk );
+                            $(sub).attr('id', value.pk + 'nav' )
+                            $(sub).css({'border-radius':'7px',
+                            'cursor': 'pointer',
+                            'display': 'block',
+                            'width': '90%',
+                            'color': '#7359C6',
+                            'background-color': '#f5ffa6',
+                            'padding': '3px 5px 2px 5px',
+                            'margin': '0 0 5px',
+                            'font-size': '80%',
+                            'transition': 'background-color 1s',
+                            'line-height': '80%',
+                            'text-decoration': 'none'
+                            });
+
+                            $(sub).hover(function(){
+                                $(this).css({ 'background-color':'orange' });},
+                                function(){
+                                $(this).css({ 'background-color':'#f5ffa6' });});
+                            $('.nav-side-bar').append(sub)
+                        };
+                    });
+                };
+            });
+
+<!-- ---------------------------selected category---------------------------------------------->
+                if ('{{cat_sel |escapejs }}'){
+                act_id = '{{cat_sel.id_category |escapejs }}' + 'nav'
+                $('#' + act_id).css({ 'background-color': '#7359C6', 'color': '#E1FF00', 'border':'none'});
+
+                $('#' + act_id).hover(function(){
+                    $(this).css({ 'background-color':'#3C8C05' }); },
+                    function(){
+                    $(this).css({ 'background-color':'#7359C6' }); } );
+                };
+<!-- ---------------------------selected subcategory---------------------------------------------->
+        if ( '{{ sub_sel |escapejs  }}' ) {
+            act_id = '{{ sub_sel.id_sub |escapejs }}' + 'nav';
+            $('#' + act_id).css({ 'background-color': '#927adf', 'color': '#E1FF00', 'border':'none'});
+
+            $('#' + act_id).hover(function(){
+                    $(this).css({ 'background-color':'#3C8C05' }); },
+                    function(){
+                    $(this).css({ 'background-color':'#927adf' }); } );
+            console.log( '#' + act_id );
+        };
+        </script>
+
+
+
+
+
     </div>
-    <div class="col-9">
+
+    <div class="col-9 content-root">
       {% block content %}  {% endblock %}
     </div>
 

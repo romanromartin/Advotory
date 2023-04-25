@@ -23,33 +23,111 @@
 
 
     {% for item in item_list %}
-        <div class="col-2">
+
+        <div class="col-2 mb-1" style="background-color:#f2faf2;" >
             <img class="w-100"  src="/{{item.1}} " alt="{{item.0}}"  style="border-radius:70px;">
         </div>
-        <div class="col-8" >
+        <div class="col-8 mb-1" style="background-color:#f2faf2;" >
             <p class="m-0" style="color:#3C8C05;" >{{ item.2 }} </p>
             <h5 class="m-0">{{ item.0 }}</h5>
             <p class="m-0" style="color: #7359C6;" > {% if item.8 %} {{ item.8}} {% endif %}  {{ item.4 }} </p>
             <p class="m-0" style="color: #7359C6;" >{{item.3}}   {{ item.5 }} </p>
         </div>
-        <div class="col-2 item-price">
-            <form method="post" >
-                {% csrf_token %}
-                <input class="delete"  type="submit"
-                   style= "background-image: url({% static 'images/delete.svg' %});"
-                   name="delete" value="{{ item.7 }}" >
-            </form>
-            <a > {{ item.6 }}</a>
+        <div class="col-2 item-price mb-1" style="background-color:#f2faf2;" >
+            <div class="row">
+                <div class="col-12 p-0  "  >
+                    <form method="post" >
+                    {% csrf_token %}
+                    <input class="delete float-right "  type="submit"
+                       style= "background-image: url({% static 'images/delete.svg' %});"
+                       name="delete" value="{{ item.7 }}" >
+                    </form>
+                </div>
+                <div class="col-12 text-center p-0" >
+                    <h5 class="m-0" > {{ item.6 }}</h5>
+                    <h6>руб.</h6>
+                </div>
+
+            </div>
+
+
         </div>
 
 
     {%  endfor %}
+
     {% if total_price > 0 %}
-    <div class="col-7" ></div>
-    <div class=" col-2 " >Итого</div>
-    <div class="col-3" > {{ total_price}} руб.</div>
+    <div class="col-6"></div>
+
+    <div class=" col-12 p-0  text-center "  >
+        {% if request.user.is_authenticated %}
+            <form method="post" >
+                {% csrf_token %}
+                <button class="float-right p-1"
+                type="submit"
+                value="order"
+                style="background-color:red; color:#E1FF00; font-size:100%; border-radius:5px; border:none; outline: none;"
+                name="order" >Оформить заказ</button>
+            </form>
+        {% else %}
+            <button class="float-right p-1"
+                data-toggle="modal" data-target="#ContactModal"
+                type="submit"
+                value="order"
+                style="background-color:red; color:#E1FF00; font-size:100%; border-radius:5px; border:none; outline: none;"
+                name="order" >Оформить заказ</button>
+
+        {% endif %}
+
+
+
+        <h5 class="float-right mr-2 mt-1" style="color:#7359C6;"  >Итого: {{ total_price}} руб.</h5>
+    </div>
+
     {% endif %}
 
+</div>
+
+
+
+<!----------------------------------------------modal window-------------------->
+
+<div class="modal fade" id="ContactModal" tabindex="-1" aria-labelledby="ContactModalLabel"
+     aria-hidden="true"  >
+  <div class="modal-dialog" style="max-width:600px;" >
+    <div class="modal-content " style="background-color:#e4e7ec;">
+        <div class="row m-0">
+           <div class="col-11">
+               <h4 class="modal-title  " id="ContactModalLabel" ></h4>
+            </div>
+            <div class="col-1"  >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color:#fd4539; font-size:200%;  ">&times;</span>
+                </button>
+            </div>
+                <form method="post"  class="w-100">
+                    {% csrf_token %}
+                        <div class="col-12 text-center" >
+                            <a >Ваше имя</a>
+                        </div>
+                        <div class="col-12 text-center login-input ">
+                            <input class="w-50" type="text" name="name"  >
+                        </div>
+                        <div class="col-12 text-center" >
+                            <a >Ваш номер телефона</a>
+                        </div>
+                        <div class="col-12 text-center login-input ">
+                            <input class="w-50" type="tel" id="phone" name="phone" required  >
+                        </div>
+                        <div class="col-12 text-center ">
+                            <button class="submit py-2 my-3 " type="submit" name="order" value="post">Отправить</button>
+                        </div>
+                </form>
+
+        </div>
+
+    </div>
+  </div>
 </div>
 
 

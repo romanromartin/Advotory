@@ -48,6 +48,8 @@ class Variation(models.Model):
     price = models.IntegerField(verbose_name='цена')
     default = models.BooleanField(default=False, verbose_name='по умолчанию')
     color = models.CharField(max_length=20, verbose_name='цвет', default='#000')
+    power = models.CharField(max_length=20, verbose_name='мощность', default='-')
+
 
 
 class Currancy(models.Model):
@@ -67,6 +69,8 @@ class Producer(models.Model):
 class Order(models.Model):
     article = models.CharField(default='00000', primary_key=True, max_length=7)
     user_order = models.CharField(max_length=100, null=True, default='аноним')
+    order_json = models.CharField(max_length=10000, default='')
+    phone = models.CharField(max_length=11, default='0000000000')
 
 
 class Item(models.Model):

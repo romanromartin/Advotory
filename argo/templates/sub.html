@@ -16,7 +16,8 @@
     </div>
 
         {% for pro in product_list %}
-            <div class="col-2 py-0 px-1 " id="{{pro.0 }}" onClick="reply_click(this.id)" style="cursor:pointer;"
+            <div class="col-2 py-1 px-1  " id="{{pro.0 }}" onClick="reply_click(this.id)"
+                style=""
                  data-toggle="modal" data-target="#PriceModal"
                  data-product="{{pro.1}}"
                  data-prw="{{pro.2}}"
@@ -26,10 +27,14 @@
                  data-matt="{{pro.6}}"
                  data-option="{{ pro.7 }}"
             >
+                <div style="cursor:pointer; line-height: 80%; color:#7359C6; font-weight:bold; font-size:80%; background-color:#f2faf2;
+                 border-radius:16px; height:180px; ">
+                    <img class="w-100 mb-1"  src="/{{pro.2}} " alt="{{pro.1}}"  style="border-radius:70px;">
+                    <div class="px-1 text-center">
+                        <a  style="" > {{pro.1}} </a>
+                    </div>
 
-
-                <img class="w-100"  src="/{{pro.2}} " alt="{{pro.1}}"  style="border-radius:70px;">
-                <a   > {{pro.1}} </a>
+                 </div>
 
                 {% for op in pro.7 %}
                 <a style="display:none;" class="{{ pro.0 }}"
@@ -40,7 +45,10 @@
                    data-price="{{ op.4 }}"
                    data-default="{{ op.5 }}"
                    data-color="{{ op.6 }}"
+                   data-power="{{ op.7 }}"
                 ></a>
+
+
                 {%  endfor  %}
 
             </div>

@@ -1,0 +1,83 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class=" handler-root"  >
+
+</div>
+
+
+<script>
+ var orders = $.parseJSON('{{ all_orders|escapejs  }}');
+ $.each(orders, function(index, val){
+    var root = $(' <div  ></div>  ');
+    $(root).attr('class', 'row');
+    $(root).attr('id', val.pk);
+
+    var article = $('<div ><a></a> </div>').attr('class', 'col-2');
+    $(article).children().text(val.pk);
+
+    var user = $('<div ><a></a> </div>').attr('class', 'col-3');
+    $(user).children().text(val.fields.user_order);
+
+    var phone = $('<div ><a></a> </div>').attr('class', 'col-3');
+    $(phone).children().text(val.fields.phone);
+
+    var status = $('<div ><a></a> </div>');
+    $(status).attr('class', 'col-4');
+    $(status).children().text('Статус');
+
+    $(root).append(article);
+    $(root).append(user);
+    $(root).append(phone);
+    $(root).append(status);
+    $('.handler-root').append(root);
+
+    $.each($.parseJSON(val.fields.order_json), function(index, orj){
+        var image = $('<div > </div>').attr('class', 'col-2 p-0');
+        var image_image  = $('<img>');
+        $(image_image).attr('src', '/' + orj.preview);
+        $(image_image).attr('class', 'w-100');
+        $(image).append(image_image);
+
+        var body = $('<div > </div>').attr('class', 'col-10');
+        var body_cat = $('<p></p>').text(orj.category);
+        $(body_cat).attr('class', 'handler-p');
+        var body_name = $('<p></p>').text(orj.name);
+        $(body_name).attr('class', 'handler-p');
+        $(body).append(body_cat).append(body_name);
+        var body_attr  = $('<p></p>')
+
+
+        var total_price = Math.round(orj.quantity * orj.price)
+        var price = $('<div > </div>').attr('class', 'col-3').append(
+            '<a>'+ orj.quantity  + orj.unit  + '</a>' + '<br>' +
+            '<a>'+ 'x '  + orj.price  + '</a>' + ' =' + '<br>' +
+            '<a>' + total_price + ' руб.</a>' );
+
+
+
+
+
+        $(root).append(image);
+        $(root).append(body);
+
+
+        console.log(orj);
+
+
+    });
+
+
+ });
+
+</script>
+
+
+
+
+
+{% endblock %}

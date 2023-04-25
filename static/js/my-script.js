@@ -92,15 +92,28 @@
             var text_label = ''
             if ( $(elem).data('width') !== '-' && $(elem).data('width') !== '' && $(elem).data('width') !== ' ' ){
              text_label += 'Ширина ' + $(elem).data('width');
-            }
+            };
             if ( $(elem).data('sheet') !== '-' && $(elem).data('sheet') !== '' && $(elem).data('sheet') !== ' '  ){
              text_label += 'Размер листа ' + $(elem).data('sheet');
-            }
+            };
             if ( $(elem).data('thicknes') !== '-' && $(elem).data('thicknes') !== '' && $(elem).data('thicknes') !== ' '  ){
              text_label += 'Толщина ' + $(elem).data('thicknes');
-            }
+            };
+            if ( $(elem).data('color') !== '-' && $(elem).data('color') !== '' && $(elem).data('color') !== ' '  ){
+                text_label += 'Цвет ' + $(elem).data('color');
+               };
+
+            if ( $(elem).data('power') !== '-' && $(elem).data('power') !== '' && $(elem).data('power') !== ' '  ){
+                text_label += 'Мощность ' + $(elem).data('power');
+               };
+
+
             text_label += ' по цене ' + $(elem).data('price') + ' руб. за ' + $('#'+ clicked_id).data('unit')
             $(radio_add).text(text_label);
+
+
+
+
             //========================================set default========
             $('.option-field').append( radio_add );
             if ( $(elem).data('default') === 'True'  ) {
@@ -127,21 +140,29 @@
 
         };
 
-
-
-
-
       $('.modal-title').text( $('#'+ clicked_id).data('product'));
       $('.prw-sel').attr( 'src', '/' + $('#'+ clicked_id).data('prw'));
       if($('#'+ clicked_id).data('producer') !== '-' && $('#'+ clicked_id).data('producer') !== '' && $('#'+ clicked_id).data('producer') !== ' '){
         $('.producer').text('Произодитель:   ' + $('#'+ clicked_id).data('producer'));
         };
 
-
-
-
     };
 
 
+    
+            $( document ).ready(function() {
+
+
+                // var obj_json = $.parseJSON(cat_json);
+
+
+                // $.each(cat_json, function(key, val){
+
+                // })
+
+
+
+
+            });
 
 

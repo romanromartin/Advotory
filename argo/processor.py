@@ -1,9 +1,16 @@
 from .models import *
+from django.core import serializers
 
 
 def all_categorys(request):
-    return {'category': Category.objects.all()}
+    data = serializers.serialize("json", Category.objects.all())
+    return {'catjson': data}
+
+
 
 def all_sub(request):
-    return {'subcategory': Subcategory.objects.all()}
+    data = serializers.serialize("json", Subcategory.objects.all())
+    return {'subjson': data}
+
+
 
